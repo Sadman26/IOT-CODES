@@ -1,0 +1,25 @@
+#include <EasyUltrasonic.h>
+#define TRIGPIN 8
+#define ECHOPIN 9
+EasyUltrasonic ultrasonic;
+void setup() {
+  Serial.begin(9600);
+  pinMode(12,OUTPUT);
+  pinMode(TRIGPIN,OUTPUT);
+  pinMode(ECHOPIN,INPUT);
+  ultrasonic.attach(TRIGPIN, ECHOPIN);
+}
+void loop() {
+  int distanceCM = ultrasonic.getDistanceCM();
+  int distancee =  (distanceCM)/ 29.1;
+  if(distancee <= 10)
+  {
+    digitalWrite(12, HIGH);
+  }
+  else if(distancee > 10)
+  {
+    digitalWrite(12, LOW);
+  }
+  Serial.println(distanceCM);
+  delay(10);
+}
